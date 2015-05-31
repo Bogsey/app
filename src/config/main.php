@@ -5,7 +5,9 @@ $config = [
     'basePath'   => dirname(__DIR__),
     'bootstrap'  => ['log'],
     'aliases'    => [
-        '@admin-views' => '@app/modules/admin/views'
+        '@admin-views' => '@app/modules/admin/views',
+        '@bower' => '@app/../vendor/bower',
+        '@vendor' => '@app/../vendor',
     ],
     'components' => [
         'assetManager' => [

@@ -6,12 +6,14 @@ RUN rm -rf /app-src
 
 # Prepare composer
 # /!\ Note: Please add your own API token to config.json; Phundament comes with a public token for your convenince, which may hit a rate limit
-ADD ./build/composer/config.json /root/.composer/config.json
+COPY ./build/composer/config.json /root/.composer/config.json
+
+WORKDIR /app
 
 # Install packages first
-ADD ./composer.lock /app/composer.lock
-ADD ./composer.json /app/composer.json
-RUN /usr/local/bin/composer install --prefer-dist --optimize-autoloader
+#COPY ./composer.lock /app/composer.lock
+#COPY ./composer.json /app/composer.json
+#RUN /usr/local/bin/composer install --prefer-dist --optimize-autoloader
 
 # Add application code
 ADD src /app/src
