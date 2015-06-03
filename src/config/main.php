@@ -8,6 +8,7 @@ $config = [
         '@admin-views' => '@app/modules/admin/views',
         '@bower' => '@app/../vendor/bower',
         '@vendor' => '@app/../vendor',
+        '@tests' => '@app/../tests',
     ],
     'components' => [
         'assetManager' => [
@@ -15,6 +16,7 @@ $config = [
             'linkAssets' => false, // Note: May also publish files, which are excluded in an asset bundle
             'dirMode'    => YII_ENV_PROD ? 0777 : null, // Note: For using mounted volumes or shared folders
             'bundles'    => YII_ENV_PROD ? require(__DIR__ . '/assets-prod.php') : null,
+            'basePath'   => '@app/../src/web/assets',
         ],
         'cache'        => [
             'class' => 'yii\caching\FileCache',

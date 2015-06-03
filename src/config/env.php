@@ -10,4 +10,4 @@ Dotenv::required(['YII_TRACE_LEVEL']);
 Dotenv::required(['APP_NAME','APP_SUPPORT_EMAIL','APP_ADMIN_EMAIL']);
 Dotenv::required(['DATABASE_DSN','DATABASE_USER','DATABASE_PASSWORD']);
 
-Dotenv::setEnvironmentVariable('APP_VERSION', file_get_contents(__DIR__.'/../../version'));
+Dotenv::setEnvironmentVariable('APP_VERSION', file_get_contents(__DIR__.'/../version'));
