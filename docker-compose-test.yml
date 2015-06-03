@@ -5,40 +5,49 @@
 # --------------------
 
 # container to run one-off commands - a dockerized shell
-appcli:
+testcli:
   extends:
     file: core-services.yml
     service: cli
   links:
-    - 'appnginx:WEB'
-    - 'appdb:DB'
+    - 'testnginx:WEB'
+    - 'testdb:DB'
+  environment:
+    YII_ENV: test
 
-appsrc:
+testsrc:
   extends:
     file: core-services.yml
     service: src
 
 # The php-fpm server for interpreting php code
-appfpm:
+testfpm:
   extends:
     file: core-services.yml
     service: fpm
   links:
-    - 'appdb:DB'
+    - 'testdb:DB'
 
 # The nginx server for serving static files directly
-appnginx:
+testnginx:
   extends:
     file: core-services.yml
     service: nginx
+  ports:
+    - "14080:80"
   links:
-    - 'appfpm:PHPFPM'
+    - 'testfpm:PHPFPM'
   environment:
-    VIRTUAL_HOST: '~^myapp\.dev\..*\.xip\.io'
+    VIRTUAL_HOST: '~^myapp-test\.dev\..*\.xip\.io'
 
 # Data Services
 # -------------
-appdb:
+testdb:
   extends:
     file: core-services.yml
     service: mariadb
+
+selenium:
+    image: selenium/standalone-firefox
+    ports:
+        - "14444:4444"

@@ -1,0 +1,56 @@
+# Phundament 4 - Local Development Stack
+# ======================================
+
+# Application services
+# --------------------
+
+# container to run one-off commands - a dockerized shell
+cli:
+  # should be replaced with: image: <project_name>_appsrc
+  build: .
+  # host-volume for local development
+  volumes:
+    - '.:/app'
+  environment:
+    APP_MIGRATION_LOOKUP: '@app/migrations'
+  command: 'tail -f /dev/null'
+
+src:
+  build: .
+  # host-volume for local development
+  volumes:
+    - '.:/app'
+  command: 'tail -f /dev/null'
+
+# The php-fpm server for interpreting php code
+fpm:
+  image: phundament/php:5.6-fpm-4.0.0
+  # host-volume for local development
+  volumes:
+    - '.:/app'
+  environment:
+    YII_DEBUG: 1
+    YII_ENV: dev
+
+# The nginx server for serving static files directly
+nginx:
+  image: 'nginx:1.9'
+  # host-volume for local development
+  volumes:
+    - '.:/app'
+    - 'build/nginx/nginx.conf:/etc/nginx/nginx.conf'
+  ports:
+    - '80'
+
+# Data Services
+# -------------
+mariadb:
+  image: mariadb
+  ports:
+    - '3306'
+  environment:
+    MYSQL_ROOT_PASSWORD: secretroot
+    MYSQL_USER: dev
+    MYSQL_PASSWORD: dev123
+    MYSQL_DATABASE: dev-myapp-1
+
