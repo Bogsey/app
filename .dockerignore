@@ -9,3 +9,5 @@ runtime
 web/assets
 
 config/local.php
+
+src/version
