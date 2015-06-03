@@ -49,7 +49,7 @@ appnginx:
   ports:
     - '80'
   environment:
-    VIRTUAL_HOST: '~^dev\.khf\.com'
+    VIRTUAL_HOST: '~^myapp\.dev\..*\.xip\.io'
 
 # Data Services
 # -------------
